@@ -1,6 +1,6 @@
 # OAIC 2026
 This repository is the TeX source code for the presentation *Vibe Fuzzing* at Offensive AI Conference
-2026, hosted in Oceanside, California by [https://remotethreat.com](RemoteThreat).
+2026, hosted in Oceanside, California by [RemoteThreat](https://remotethreat.com).
 
 The PDF of the presentation is available at `Presentation.pdf`.
 
