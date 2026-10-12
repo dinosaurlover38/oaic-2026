@@ -1,0 +1,215 @@
+% Package inclusions
+\usepackage[english]{babel}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+%% Math packages
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{fancyvrb}
+\usepackage{bbm}
+\usepackage{physics}
+\usepackage{ifthen}
+\usepackage{calligra}
+\usepackage{tikz}
+\usepackage{soul}
+\usepackage{comment}
+\usepackage[many, minted]{tcolorbox}
+
+\usepackage[utf8]{inputenc}
+\tcbuselibrary{listings}
+\tcbuselibrary{minted}
+
+% tikz
+\usetikzlibrary{tikzmark, fit, calc, arrows.meta, positioning, bending, backgrounds, matrix}
+
+\newtcblisting{tcolorboxc}{
+    colframe=lavender,
+    colback=gray,
+    listing engine=minted,
+    listing only,
+    minted language=c,
+    minted options={style=gruvbox-dark},
+}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25, 0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\newtcblisting{tcolorbox-python}{
+    colframe=lavender,
+    colback=gray,
+    listing only,
+    listing engine=minted,
+    minted language=python,
+    minted options={style=gruvbox-dark},
+}
+
+
+\usepackage{csquotes}
+\usepackage{tensor}
+\usepackage[thicklines]{cancel}
+\usepackage{pstricks}
+\usepackage{etoolbox}
+\usepackage[backend=biber, bibstyle=nature, sorting=nty, citestyle=numeric-comp]{biblatex} %Custom bibliography
+
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+\newcommand{\scriptr}{\mathcalligra{r}\,}
+\newcommand{\boldscriptr}{\pmb{\mathcalligra{r}}\,}
+\def\rc{\scriptr}
+\def\brc{\boldscriptr}
+\def\hrc{\hat\brc}
+\newcommand{\ie}{\emph{i.e.}} %id est
+\newcommand{\eg}{\emph{e.g.}} %exempli gratia
+\newcommand{\rtd}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\dirac}[1]{\ensuremath{\delta \left( #1 \right)}}
+\newcommand{\diract}[1]{\ensuremath{\delta^3 \left( #1 \right)}}
+\newcommand{\e}{\ensuremath{\epsilon_0}}
+\newcommand{\m}{\ensuremath{\mu_0}}
+\newcommand{\V}{\ensuremath{\mathcal{V}}}
+\newcommand{\prnt}[1]{\ensuremath{\left(#1\right)}} %parentheses
+\newcommand{\colch}[1]{\ensuremath{\left[#1\right]}} %square brackets
+\newcommand{\chave}[1]{\ensuremath{\left\{#1\right\}}}  %curly brackets
+\newcommand\eqdef{\stackrel{\mathclap{\normalfont \tiny\mbox{\textrm{def}}}}{=}}
+
+\useoutertheme{infolines}
+\useinnertheme{rectangles}
+\usefonttheme{professionalfonts}
+
+% OAIC theme colors (fall theme, not the beach theme like they asked for :)
+\definecolor{rust}{HTML}{d16202}
+\definecolor{darkgold}{HTML}{e99851}
+\definecolor{burntcoral}{HTML}{2d80bf}
+\definecolor{warmwhite}{HTML}{f5f7f8}
+\definecolor{parchment}{HTML}{2c2824}
+\definecolor{oceanteal}{HTML}{4ea8d3}
+\definecolor{slate}{HTML}{726a6f}
+\definecolor{ink}{HTML}{040b10}
+
+% From here on, we operate on the basis of dark-theme slides with theme colors
+\colorlet{themetitle}{rust}
+\colorlet{themeneutral}{slate}
+\colorlet{themeaccent}{darkgold}
+\colorlet{themestrong}{burntcoral}
+\colorlet{themefont}{warmwhite}
+\colorlet{themebg}{parchment}
+\colorlet{themelink}{oceanteal}
+\colorlet{themedark}{ink}
+
+\renewcommand{\CancelColor}{\color{orange2}}
+
+\newcommand{\themeref}[2]{{\href{#1}{\color{themelink}#2}}}
+
+\setbeamercolor{titlelike}{parent=structure, bg=structure, fg=themetitle}
+\setbeamercolor{section in toc}{fg=a}
+\setbeamercolor{subsection in toc}{fg=white}
+\setbeamercolor{caption name}{fg=themetitle}
+
+\setbeamercolor{item projected}{bg=gold, fg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{local structure}{fg=themeaccent}
+
+\setbeamercolor{alerted text}{fg=themefont}
+\setbeamercolor{block title}{bg = blue2}
+\setbeamercolor{block title alerted}{bg=red2}
+\setbeamercolor{block title example}{bg=green2}
+\setbeamercolor{background canvas}{bg=themebg}
+\setbeamercolor{normal text}{bg=gray,fg=themefont}
+
+% --- Fonts: IBM Plex Sans setup ---
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{plex-sans}
+\usepackage{plex-mono}
+% Default: Plex Sans Regular
+\renewcommand{\familydefault}{\sfdefault}
+
+% Beamer font settings
+\setbeamerfont{frametitle}{family=\sffamily,series=\bfseries}
+\setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\LARGE}
+
+\setbeamertemplate{footline}{
+    
+    \begin{tikzpicture}[remember picture, overlay]
+        \iftoggle{LOGO}{%
+        \node[draw=none, inner sep=0pt] (logo) at ($(current page.south west) + (1.8cm, 0.9cm)$)
+            {\includegraphics[width=0.15\textwidth]{images/oaic_logo_transparent.png}};
+        }{}
+        \node[draw=none] (pagenumber) at ($(current page.south east) + (-0.75cm, 0.75cm)$)
+            {\color{themeaccent}\footnotesize \insertframenumber};
+    \end{tikzpicture}
+}
+
+\setbeamertemplate{headline}{
+    \iftoggle{DINOSAUR}{%
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[draw=none, inner sep=0pt] (dino) at ($(current page.north east) + (-1cm, -1cm)$)
+                {\includegraphics[width=0.055\textwidth]{images/dino.png}};
+        \end{tikzpicture}
+    }{}
+}
+
+\setbeamertemplate{itemize item}{\large\textbullet}
+\setbeamertemplate{itemize subitem}{\large\textbullet}
+
+\setbeamertemplate{blocks}[rectangle]
+\setbeamercovered{dynamic}
+
+\setbeamertemplate{section page}
+{
+	\begin{centering}
+        \usebeamercolor[fg]{section title}
+        \usebeamerfont{section title}\insertsection\par
+        \usebeamerfont{subsection title}\insertsubsection\par
+	\end{centering}
+}
+
+\setbeamertemplate{subsection page}
+{
+	\begin{centering}
+		\begin{beamercolorbox}[sep=12pt,center]{part title}
+			\usebeamerfont{subsection title}\insertsubsection\par
+		\end{beamercolorbox}
+	\end{centering}
+}
+
+\setbeamersize{text margin left=8mm, text margin right=8mm}
+\setbeamertemplate{frametitle}
+{
+    \begin{tikzpicture}[remember picture, overlay]
+        % Title
+        \node[anchor=north west, xshift=1cm, yshift=-0.5cm] (title) at (current page.north west) {
+            \usebeamerfont{title}{\insertframetitle}
+        };
+
+        % Bars beneath
+        \node[draw=themestrong, fill=themestrong, minimum height=0.66mm, inner sep=0pt, minimum width=0.66\textwidth]
+             (leftbar) at ($(title.south west) + (4.8cm, -0.25cm)$) {};
+        \node[draw=themeneutral, fill=themeneutral, minimum height=0.66mm, inner sep=0pt, minimum width=0.1\textwidth,
+             right=0cm of leftbar] (middlebar) {};
+        \node[draw=themeaccent, fill=themeaccent, minimum height=0.66mm, inner sep=0pt, minimum width=0.18\textwidth,
+             right=0cm of middlebar] (rightbar) {};
+    \end{tikzpicture}
+}
+
+\setbeamertemplate{title page}{
+    \begin{center}
+        {\usebeamerfont{title}\color{themetitle}\inserttitle}\\
+        \vspace{0.25cm}
+        \insertsubtitle\\
+        \vspace{1.25cm}
+        \insertauthor\\
+        \vspace{0.25cm}
+        \today\\
+        \vspace{0.25cm}
+        \begin{center}
+            Freely available from \themeref{https://github.com/dinosaurlover38/tech-talks}{https://github.com/dinosaurlover38/tech-talks}
+            under a CC-BY-SA-NC-4 license.
+        \end{center}
+        \vspace{0.25cm}
+    \end{center}
+}

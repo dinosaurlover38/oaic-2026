@@ -1,0 +1,60 @@
+% Summary only
+\newtoggle{ANIMATIONS}
+% Include notes
+\newtoggle{NOTES}
+% Include backup slides
+\newtoggle{BACKUP}
+% Use logo
+\newtoggle{LOGO}
+% Approved for public release
+\newtoggle{PUBLIC}
+% hell yeah
+\newtoggle{DINOSAUR}
+
+\toggletrue{LOGO}
+\toggletrue{ANIMATIONS}
+% \toggletrue{NOTES}
+\toggletrue{BACKUP}
+\toggletrue{PUBLIC}
+\toggletrue{DINOSAUR}
+
+% License for "PUBLIC"
+\iftoggle{PUBLIC}{% True
+    \newcommand{\license}{CC-BY-NC-SA-4.0 license}
+}{% False
+    \newcommand{\license}{}
+}
+
+% Configuration dependent commands & environments
+\newcommand{\Animate}[2]{\iftoggle{ANIMATIONS}{\onslide<#1>{#2}}{#2}}
+
+\newcommand{\AnimateOnly}[2]{\iftoggle{ANIMATIONS}{\only<#1>{#2}}{#2}}
+
+\newcommand{\AnimateNode}[2]{\iftoggle{ANIMATIONS}{\node<#1>[#2]}{\node[#2]}}
+
+\newcommand{\AnimateDraw}[2]{\iftoggle{ANIMATIONS}{\draw<#1>[#2]}{\draw[#2]}}
+
+\iftoggle{ANIMATIONS}{% True
+    \newenvironment{noanimationframe}[2][\unskip]{
+        \settoggle{ANIMATIONS}{false}
+        % Renew existing animation commands
+        \ifthenelse{\equal{#1}{\unskip}}{
+            \begin{frame}{#2}
+        }{
+            \begin{frame}[#1]{#2}
+        }
+    }{
+        \end{frame}
+        \settoggle{ANIMATIONS}{true}
+    }
+}{% False
+    \newenvironment{noanimationframe}[2][\unskip]{
+            \ifthenelse{\equal{#1}{\unskip}}{
+                \begin{frame}{#2}
+            }{
+                \begin{frame}[#1]{#2}
+            }
+        }{
+            \end{frame}
+    }
+}

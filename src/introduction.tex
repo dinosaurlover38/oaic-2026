@@ -1,0 +1,83 @@
+\begin{frame}{Who am I?}
+    \begin{columns}
+        \begin{column}{0.67\textwidth}
+            \begin{itemize}
+                \item I'm a security researcher at IBM X-Force Offensive Research (XOR), we're the
+                    exploit dev group behind X-Force's Adversary Simulation group
+                \item This project is one I built to do long-term vulnerability research, mostly against Windows
+            \end{itemize}
+            \vspace{0.5cm}
+            \begin{itemize}
+                \item If you find this research interesting, follow me on twitter/X for updates \textbf{@\_dinolover38}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.33\textwidth}
+            \begin{figure}
+                \includegraphics[width=0.8\textwidth]{images/volcano_selfie.jpg}
+            \end{figure}
+            \vspace{0.5cm}
+            \includegraphics[width=0.9\textwidth]{images/xor_logo_white.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Inspiration}
+    There's been so many AIxFuzzing crossover episodes, but many of them fail to address
+    the core, systemic limitations that this technology has:
+    \Animate{6-}{%
+        \begin{enumerate}
+            \Animate{6-}{\item Fragile inputs tend to break (e.g. xml)}
+            \Animate{7-}{\item No concept of program state or state machines}
+            \Animate{8-}{\item No concept of program semantics}
+            \Animate{9-}{\item Rarely useful outside of memory corruption}
+            \Animate{10-}{\item Expensive to build and maintain}
+        \end{enumerate}
+    }
+    \vspace{0.25cm}
+    \Animate{11-}{In other words, fuzzing was designed to solve 2013 problems, not 2026 ones.}
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[draw=none] at (0, 0) {};
+
+        % 3-part animation showing the evolutionary algorithm
+        % Population-Mutations-Survival Function
+        \AnimateNode{2-}{circle, inner sep=2pt, fill=themeaccent} (population)
+            at (-1.75cm, 2.5cm) {};
+        \AnimateNode{3-}{circle, inner sep=2pt, fill=themeaccent} (mutation)
+            at (0cm, 2cm) {};
+        \AnimateNode{4-}{circle, inner sep=2pt, fill=themeaccent} (fitness)
+            at (-1cm, 1cm) {};
+
+        \AnimateNode{2-}{draw=none} (plabel) at ($(population) + (-0.33cm, 0.33cm)$)
+            {\color{themeaccent}\footnotesize{population}};
+        \AnimateNode{3-}{draw=none} (mlabel) at ($(mutation) + (0.45cm, 0.66cm)$)
+            {\color{themeaccent}\footnotesize{random}};
+        \AnimateNode{3-}{draw=none} (mlabel) at ($(mutation) + (0.45cm, 0.33cm)$)
+            {\color{themeaccent}\footnotesize{mutations}};
+        \AnimateNode{4-}{draw=none} (flabel) at ($(fitness) + (-0.33cm, -0.33cm)$)
+            {\color{themeaccent}\footnotesize{fitness function}};
+
+        \AnimateDraw{3-}{-, themeaccent} (population) -- (mutation);
+        \AnimateDraw{4-}{-, themeaccent} (mutation) -- (fitness);
+        \AnimateDraw{5-}{-, themeaccent} (fitness) -- (population);
+
+
+    \end{tikzpicture}
+    \vspace{-0.6cm}
+\end{frame}
+
+\begin{frame}{Making a Fuzzer for a Subagent}
+    \textit{Vibe Fuzzing} is the practice of delegating a fuzzing engine's control plane to an LLM
+    to guide input generation in the data plane. This is most practically done as a subagent,
+    \begin{itemize}
+        \item The main assistant determines when fuzzing is a rational step forward.
+        \item A subagent uses source code, coverage data, decompiler text, patch notes, engine
+            state and so forth to control input generation.
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        The implementation is called \textit{vf3}--- the very fast, very fun, vibe fuzzer. \\
+        It's almost like an SDK for building AI-powered fuzzers, and can fuzz anything from \\
+        PNG images to the Windows NT Kernel!
+    \end{center}
+    \vspace{-0.5cm}
+\end{frame}

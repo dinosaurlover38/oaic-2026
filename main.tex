@@ -1,0 +1,24 @@
+\documentclass[aspectratio=169]{beamer}
+
+\input{preamble}
+
+\title{Vibe Fuzzing--- Building an AI-guided Fuzzing Engine for Subagents}
+\subtitle{Using Graphs to Fuzz the Entire Planet}
+\author[IBM XOR]{Sam Lovejoy}
+\date{\today}
+
+%%%%%% NOTES CONFIGURATION %%%%%%
+\input{config}
+\iftoggle{NOTES}{\setbeameroption{show notes on second screen=right}}
+
+\begin{document}
+    \section{Introductions}
+    \begin{frame}[noframenumbering, plain]
+        \titlepage
+    \end{frame}
+    \input{src/introduction.tex}
+    \input{src/data_plane.tex}
+    \input{src/control_plane.tex}
+    \input{src/harnessing.tex}
+    \input{src/conclusion.tex}
+\end{document}

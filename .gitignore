@@ -1,0 +1,17 @@
+# Ignore artifacts
+*.aux
+*.log
+*.nav
+*.out
+*.toc
+*.xml
+*.snm
+*.pdf
+*.bcf
+*_minted-main*
+
+# Ignore vim
+*.sw?
+
+# Ignore .zip
+*.zip
